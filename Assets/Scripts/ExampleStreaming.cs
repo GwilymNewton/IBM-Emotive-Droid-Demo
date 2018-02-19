@@ -74,7 +74,7 @@ public class ExampleStreaming : MonoBehaviour
     private int emotional_growth = 100;
     private int emotional_decay = 50;
     private int idle_threshold = 200;
-    private float emotion_threshold = 0.75f;
+    private float emotion_threshold = 0.65f;
 
     private float bar_multplier = 2f;
 

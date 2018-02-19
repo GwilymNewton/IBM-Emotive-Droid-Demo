@@ -22,11 +22,11 @@ public class TextScroller : MonoBehaviour {
     void Start() {
 
         Log.Debug("TextScroller", "Sending text text");
-        addline("One", "joy");
-        addline("Two", "joy");
-        addline("Three", "joy");
-        addline("Four", "joy");
-        addline("Five", "joy");
+        addline("THINK", "joy");
+        addline("THINK", "joy");
+        addline("THINK", "joy");
+        addline("THINK", "joy");
+        addline("THINK", "joy");
 
     }
 
