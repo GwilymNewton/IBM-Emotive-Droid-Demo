@@ -350,30 +350,6 @@ public class ExampleStreaming : MonoBehaviour
         Log.Debug("Tone Levels ", "5) Updating state to {0} ", state);
         CactusField.text = state;
 
-        //Work out emotion percentages
-        float total = emotional_states.Sum(x => x.Value);
-        if (total > 0)
-        {
-            //We have emotions & work out %
-            float joy_per = (emotional_states["joy"] / total);
-            float sadness_per = (emotional_states["sadness"]) / total;
-            float fear_per = (emotional_states["fear"] / total);
-            float disgust_per = (emotional_states["disgust"] / total);
-            float anger_per = (emotional_states["anger"] / total);
-
-            Log.Debug("Tone Levels", "6)Updating bars Total:{5}  J:{0}% S:{1}% F:{2}% D:{3}% A:{4}%", joy_per * 100, sadness_per * 100, fear_per * 100, disgust_per * 100, anger_per, total);
-
-            bar1JoyRenderer.transform.localScale = new Vector3(1F, 1F, 1F) * (1 + joy_per * bar_multplier);
-            bar2SadnessRenderer.transform.localScale = new Vector3(1F, 1F, 1F) * (1 + sadness_per * bar_multplier);
-            bar3FearRenderer.transform.localScale = new Vector3(1F, 1F, 1F) * (1 + fear_per * bar_multplier);
-            bar4DisgustRenderer.transform.localScale = new Vector3(1F, 1F, 1F) * (1 + disgust_per * bar_multplier);
-            bar5AngerRenderer.transform.localScale = new Vector3(1F, 1F, 1F) * (1 + anger_per * bar_multplier);
-
-
-
-        }
-        else
-        {
             // set to default
             Log.Debug("Tone Levels", "6)Updating bars - No Emotion");
             bar1JoyRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
@@ -382,7 +358,7 @@ public class ExampleStreaming : MonoBehaviour
             bar4DisgustRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
             bar5AngerRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 
-        }
+
 
         int state_id = 0;
         switch (state)
@@ -392,18 +368,23 @@ public class ExampleStreaming : MonoBehaviour
                 break;
             case "joy":
                 state_id = 1;
+                bar1JoyRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "sadness":
                 state_id = 2;
+                bar2SadnessRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "fear":
                 state_id = 3;
+                bar3FearRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "disgust":
                 state_id = 4;
+                bar4DisgustRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "anger":
                 state_id = 5;
+                bar5AngerRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
         }
 
