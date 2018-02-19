@@ -75,8 +75,17 @@ public class ExampleStreaming : MonoBehaviour
     private int emotional_decay = 50;
     private int idle_threshold = 200;
     private float emotion_threshold = 0.65f;
+    private int max_emotion_value = 1000;
 
     private float bar_multplier = 2f;
+    private float bar_scale = 0.01f;
+
+    //Bar 
+    private Vector3 joy_base = new Vector3(-10f, 16f, 0);
+    private Vector3 sad_base = new Vector3(-5f, 16f, 0);
+    private Vector3 fear_base = new Vector3(0f, 16f, 0);
+    private Vector3 disgust_base = new Vector3(5f, 16f, 0);
+    private Vector3 anger_base = new Vector3(10f, 16f, 0);
 
 
     //Link to text script
@@ -319,7 +328,7 @@ public class ExampleStreaming : MonoBehaviour
         
 
         //Grow that emotion
-        if (tones[max_tone] > emotion_threshold)
+        if (tones[max_tone] > emotion_threshold && emotional_states[max_tone] < max_emotion_value)
         {
             Log.Debug("Tone Levels ", "1) Growing Max Tone = {0}", max_tone);
             //text_scroll.addline("test", max_tone);
@@ -352,11 +361,23 @@ public class ExampleStreaming : MonoBehaviour
 
             // set to default
             Log.Debug("Tone Levels", "6)Updating bars - No Emotion");
-            bar1JoyRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-            bar2SadnessRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-            bar3FearRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-            bar4DisgustRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-            bar5AngerRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
+            bar1JoyRenderer.transform.localScale = new Vector3(1F, 1F+(bar_scale*emotional_states["joy"]), 1F);
+            bar1JoyRenderer.transform.localPosition = joy_base+ new Vector3(0F, (bar_scale * emotional_states["joy"])/2, 0F);
+
+        bar2SadnessRenderer.transform.localScale = new Vector3(1F, 1F + (bar_scale * emotional_states["sadness"]), 1F);
+        bar2SadnessRenderer.transform.localPosition = sad_base + new Vector3(0F, (bar_scale * emotional_states["sadness"]) / 2, 0F);
+
+
+        bar3FearRenderer.transform.localScale = new Vector3(1F, 1F + (bar_scale * emotional_states["fear"]), 1F);
+        bar3FearRenderer.transform.localPosition = fear_base + new Vector3(0F, (bar_scale * emotional_states["fear"]) / 2, 0F);
+
+
+        bar4DisgustRenderer.transform.localScale = new Vector3(1F, 1F + (bar_scale * emotional_states["disgust"]), 1F);
+        bar4DisgustRenderer.transform.localPosition = disgust_base + new Vector3(0F, (bar_scale * emotional_states["disgust"]) / 2, 0F);
+
+
+        bar5AngerRenderer.transform.localScale = new Vector3(1F, 1F + (bar_scale * emotional_states["anger"]), 1F);
+        bar5AngerRenderer.transform.localPosition = anger_base + new Vector3(0F, (bar_scale * emotional_states["anger"]) / 2, 0F);
 
 
 
@@ -368,23 +389,23 @@ public class ExampleStreaming : MonoBehaviour
                 break;
             case "joy":
                 state_id = 1;
-                bar1JoyRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
+                //bar1JoyRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "sadness":
                 state_id = 2;
-                bar2SadnessRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
+                //bar2SadnessRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "fear":
                 state_id = 3;
-                bar3FearRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
+                //bar3FearRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "disgust":
                 state_id = 4;
-                bar4DisgustRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
+                //bar4DisgustRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "anger":
                 state_id = 5;
-                bar5AngerRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
+                //bar5AngerRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
         }
 
