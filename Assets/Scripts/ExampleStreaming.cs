@@ -33,9 +33,6 @@ using IBM.Watson.DeveloperCloud.Connection;
 // and for Regex
 using System.Text.RegularExpressions;
 
-// and for Ethan's body
-using UnityStandardAssets;
-using UnityStandardAssets.Characters.ThirdPerson;
 using System.Linq;
 
 public class ExampleStreaming : MonoBehaviour
@@ -80,6 +77,10 @@ public class ExampleStreaming : MonoBehaviour
     private float emotion_threshold = 0.75f;
 
     private float bar_multplier = 2f;
+
+
+    //Link to text script
+    public TextScroller text_scroll;
 
     // magic
     //public GameObject sphere_rad;
@@ -287,7 +288,7 @@ public class ExampleStreaming : MonoBehaviour
 	// TESTING 
 	private void OnGetToneAnalyze(ToneAnalyzerResponse resp, Dictionary<string, object> customData)
 	{
-        //Log.Debug("ExampleToneAnalyzer.OnGetToneAnalyze()", "{0}", customData["json"].ToString());
+        Log.Debug("ExampleToneAnalyzer.OnGetToneAnalyze()", "{0}", customData["json"].ToString());
         //Log.Debug ("$$$$$ TONE ANALYTICAL", "{0}",resp.document_tone.tone_categories[1].tones[0].score); // ANALYTICAL
         //Log.Debug ("$$$$$ TONE CONFIDENT", "{0}",resp.document_tone.tone_categories[1].tones[1].score); //  CONFIDENT
         //Log.Debug ("$$$$$ TONE TENTATIVE", "{0}",resp.document_tone.tone_categories[1].tones[2].score); //  TENTATIVE
@@ -321,6 +322,7 @@ public class ExampleStreaming : MonoBehaviour
         if (tones[max_tone] > emotion_threshold)
         {
             Log.Debug("Tone Levels ", "1) Growing Max Tone = {0}", max_tone);
+            //text_scroll.addline("test", max_tone);
             emotional_states[max_tone] += emotional_growth;
         }
         else
@@ -473,7 +475,8 @@ public class ExampleStreaming : MonoBehaviour
 			{
 				foreach (var alt in res.alternatives) {
 					string text = string.Format ("{0} ({1}, {2:0.00})\n", alt.transcript, res.final ? "Final" : "Interim", alt.confidence);
-					//Log.Debug ("ExampleStreaming.OnRecognize()", text);
+					Log.Debug ("ExampleStreaming.OnRecognize()", text);
+                    text_scroll.addline(alt.transcript, "joy");
 					ResultsField.text = text;
 
 					// ENTERING THE TONE ZONE - when the utterance contains this word
