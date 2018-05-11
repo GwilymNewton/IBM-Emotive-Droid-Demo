@@ -42,7 +42,7 @@ public class EmotivDroid : MonoBehaviour
 	private string _password_STT = "Y8OJ7Z55FqQL";
 	private string _url_STT = "https://stream.watsonplatform.net/speech-to-text/api";
 
-	public Text ResultsField;
+	//public Text ResultsField;
 	public Text CactusField;
 
 	private SpeechToText _speechToText;
@@ -302,7 +302,7 @@ public class EmotivDroid : MonoBehaviour
         //Log.Debug ("$$$$$ TONE CONFIDENT", "{0}",resp.document_tone.tone_categories[1].tones[1].score); //  CONFIDENT
         //Log.Debug ("$$$$$ TONE TENTATIVE", "{0}",resp.document_tone.tone_categories[1].tones[2].score); //  TENTATIVE
 
-        ResultsField.text = (customData["json"].ToString());  // works but long and cannot read
+        //ResultsField.text = (customData["json"].ToString());  // works but long and cannot read
 
         double anger = resp.document_tone.tone_categories[0].tones[0].score;
         double disgust = resp.document_tone.tone_categories[0].tones[1].score;
@@ -455,7 +455,7 @@ public class EmotivDroid : MonoBehaviour
 		RAW = Regex.Replace(RAW, "score", " ");
 		RAW = Regex.Replace(RAW, @"[{\\},:]", "");
 		RAW = Regex.Replace(RAW, "\"", "");
-		ResultsField.text = RAW;
+		//ResultsField.text = RAW;
 
 		_analyzeToneTested = true;
 	}
@@ -479,7 +479,7 @@ public class EmotivDroid : MonoBehaviour
 					string text = string.Format ("{0} ({1}, {2:0.00})\n", alt.transcript, res.final ? "Final" : "Interim", alt.confidence);
 					Log.Debug ("ExampleStreaming.OnRecognize()", text);
                     text_scroll.addline(alt.transcript, "joy");
-					ResultsField.text = text;
+					//ResultsField.text = text;
 
 					// ENTERING THE TONE ZONE - when the utterance contains this word
 					//if (alt.transcript.Contains ("feel") | alt.transcript.Contains ("you") | alt.transcript.Contains ("Jimmy") | alt.transcript.Contains ("robot")) {
