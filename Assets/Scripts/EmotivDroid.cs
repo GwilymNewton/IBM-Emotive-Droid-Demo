@@ -35,7 +35,7 @@ using System.Text.RegularExpressions;
 
 using System.Linq;
 
-public class ExampleStreaming : MonoBehaviour
+public class EmotivDroid : MonoBehaviour
 {
 
 	private string _username_STT = "d5935aa0-b95a-42f5-84e8-5689664cf9a7";
