@@ -1,6 +1,6 @@
 ﻿/**
  * 
- * ############# HELLO VIRTUAL WORLD
+ * ############# IBM Emerging Technology
 * Copyright 2015 IBM Corp. All Rights Reserved.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,9 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-* THIS IS VERY VERY VERY ROUGH CODE - WARNING :) 
+* 
+* @auther Gwilym Newton (gwilnew@uk.ibm.com)
+* 
 */
 
 using UnityEngine;
@@ -25,8 +27,6 @@ using IBM.Watson.DeveloperCloud.Utilities;
 using IBM.Watson.DeveloperCloud.DataTypes;
 using System.Collections.Generic;
 using UnityEngine.UI;
-
-// added this from the TONE ANALYZER . CS file
 using IBM.Watson.DeveloperCloud.Services.ToneAnalyzer.v3;
 using IBM.Watson.DeveloperCloud.Connection;
 
@@ -42,7 +42,6 @@ public class EmotivDroid : MonoBehaviour
 	private string _password_STT = "Y8OJ7Z55FqQL";
 	private string _url_STT = "https://stream.watsonplatform.net/speech-to-text/api";
 
-	//public Text ResultsField;
 	public Text CactusField;
 
 	private SpeechToText _speechToText;
@@ -91,7 +90,6 @@ public class EmotivDroid : MonoBehaviour
     //Link to text script
     public TextScroller text_scroll;
 
-    // magic
     //public GameObject sphere_rad;
     public MeshRenderer sphereMeshRenderer;
 	public MeshRenderer cubeMeshRenderer;
@@ -102,18 +100,7 @@ public class EmotivDroid : MonoBehaviour
 	public MeshRenderer bar4DisgustRenderer;
 	public MeshRenderer bar5AngerRenderer;
 
-	public MeshRenderer DroidRenderer; // droid R2D2 wannabe
-
-
-
-
-	// Tin man is ethanbot
-	public MeshRenderer TinManRenderer; // tinman  - ethan stock character with metal body - for the SCALE and LOCAION
-	public MeshRenderer TinManHelmet; // tinman just the helm - for color
-
-	public MeshRenderer cyl1AnalyticalRenderer;
-	public MeshRenderer cyl2ConfidentRenderer;
-	public MeshRenderer cyl3TentativeRenderer;
+	public MeshRenderer DroidRenderer; 
 
 	public Material original_material;
 	public Material red_material;
@@ -148,7 +135,6 @@ public class EmotivDroid : MonoBehaviour
 
 		StartRecording();
 
-
 		// TONE ZONE
 		Credentials credentials_TONE = new Credentials(_username_TONE, _password_TONE, _url_TONE);
 		_toneAnalyzer = new ToneAnalyzer(credentials_TONE);
@@ -159,11 +145,6 @@ public class EmotivDroid : MonoBehaviour
 		bar3FearRenderer.material = purple_material;
 		bar4DisgustRenderer.material = green_material;
 		bar5AngerRenderer.material = red_material;
-		 
-		
-
-		//This is a "on first run" test
-		//Runnable.Run(Examples()); // example on pump prime
 	}
 
 	public bool Active
@@ -297,13 +278,6 @@ public class EmotivDroid : MonoBehaviour
 	// TESTING 
 	private void OnGetToneAnalyze(ToneAnalyzerResponse resp, Dictionary<string, object> customData)
 	{
-        Log.Debug("ExampleToneAnalyzer.OnGetToneAnalyze()", "{0}", customData["json"].ToString());
-        //Log.Debug ("$$$$$ TONE ANALYTICAL", "{0}",resp.document_tone.tone_categories[1].tones[0].score); // ANALYTICAL
-        //Log.Debug ("$$$$$ TONE CONFIDENT", "{0}",resp.document_tone.tone_categories[1].tones[1].score); //  CONFIDENT
-        //Log.Debug ("$$$$$ TONE TENTATIVE", "{0}",resp.document_tone.tone_categories[1].tones[2].score); //  TENTATIVE
-
-        //ResultsField.text = (customData["json"].ToString());  // works but long and cannot read
-
         double anger = resp.document_tone.tone_categories[0].tones[0].score;
         double disgust = resp.document_tone.tone_categories[0].tones[1].score;
         double fear = resp.document_tone.tone_categories[0].tones[2].score;
@@ -317,14 +291,10 @@ public class EmotivDroid : MonoBehaviour
     { "fear",  fear},
     { "joy",  joy},
     { "sadness",  sadness},
-};
+	};
 
 
-
-
-
-       // Log.Debug ("Tone Levels", "J:{0} S:{1} F:{2} D:{3} A:{4}", joy,sadness,fear,disgust,anger);
-        string max_tone = tones.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+		 string max_tone = tones.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
         
 
         //Grow that emotion
@@ -389,23 +359,18 @@ public class EmotivDroid : MonoBehaviour
                 break;
             case "joy":
                 state_id = 1;
-                //bar1JoyRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "sadness":
                 state_id = 2;
-                //bar2SadnessRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "fear":
                 state_id = 3;
-                //bar3FearRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "disgust":
                 state_id = 4;
-                //bar4DisgustRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
             case "anger":
                 state_id = 5;
-                //bar5AngerRenderer.transform.localScale = new Vector3(3F, 3F, 3F);
                 break;
         }
 
@@ -423,25 +388,13 @@ public class EmotivDroid : MonoBehaviour
         }
         
 
-
-
-        //droid_animator.SetTrigger("IsSad");
-        ///Log.Debug("TRIGER: IsSad", "", 0); // JOY
-
         if (resp.document_tone.tone_categories[1].tones[0].score > emotion_threshold) {
-			//DroidRenderer.material = white_material;
-			//CactusField.text = "Analytical";
-			//cyl1AnalyticalRenderer.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F);
+
 		}
 		else if (resp.document_tone.tone_categories[1].tones[1].score > emotion_threshold) {
-			//DroidRenderer.material = white_material;
-			//CactusField.text = "Confident";
-			//cyl2ConfidentRenderer.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F);
+
 		}
 		else if (resp.document_tone.tone_categories [1].tones[2].score > emotion_threshold) {
-			//DroidRenderer.material = white_material;
-			//CactusField.text = "Tentative"; 
-			//cyl3TentativeRenderer.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F);
 		}
 
 
@@ -485,17 +438,11 @@ public class EmotivDroid : MonoBehaviour
 					//if (alt.transcript.Contains ("feel") | alt.transcript.Contains ("you") | alt.transcript.Contains ("Jimmy") | alt.transcript.Contains ("robot")) {
 					if (true) {
 						// if the utterance
-						// Runnable.Run(Examples()); // this compiled - it's simply the same test from startup
 
 
 						string GHI = alt.transcript;
 						if (!_toneAnalyzer.GetToneAnalyze (OnGetToneAnalyze, OnFail, GHI))
 							//Log.Debug ("ExampleToneAnalyzer.Examples()", "Failed to analyze!");
-
-						// TEST START
-						//  Analyze tone
-						//						if (!_toneAnalyzer.GetToneAnalyze(OnGetToneAnalyze, OnFail, _stringToTestTone2))
-						//							Log.Debug("ExampleToneAnalyzer.Examples()", "Failed to analyze!");
 
 						Log.Debug ("ExampleToneAnalyzer.Examples()", "NESTED TONE ZONE branch complete.");
 						//ResultsField.text = "tone analyzed! 111";
@@ -505,17 +452,11 @@ public class EmotivDroid : MonoBehaviour
 
 					// ENTERING THE TONE ZONE - when the utterance contains this word
 					if (alt.transcript.Contains ("reset")) {
-						cyl1AnalyticalRenderer.transform.localScale = new Vector3 (1F, 1F, 1F);
-						cyl2ConfidentRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-						cyl3TentativeRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 						bar1JoyRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 						bar2SadnessRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 						bar3FearRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 						bar4DisgustRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
 						bar5AngerRenderer.transform.localScale = new Vector3(1F, 1F, 1F);
-						//DroidRenderer.material = white_material;
-
-						TinManRenderer.transform.localScale = new Vector3(10F, 10F, 10F);
 					}
 
 
