@@ -185,7 +185,7 @@ public class ExampleStreaming : MonoBehaviour
 				_speechToText.SmartFormatting = true;
 				_speechToText.SpeakerLabels = false;
 				_speechToText.WordAlternativesThreshold = null;
-				_speechToText.StartListening(OnRecognize, OnRecognizeSpeaker);
+				_speechToText.StartListening(OnRecognize, OnRecognizeSpeaker,null);
 			}
 			else if (!value && _speechToText.IsListening)
 			{
@@ -469,7 +469,7 @@ public class ExampleStreaming : MonoBehaviour
 
 
 
-	private void OnRecognize(SpeechRecognitionEvent result)
+	private void OnRecognize(SpeechRecognitionEvent result,Dictionary<string, object> customData)
 	{
 		if (result != null && result.results.Length > 0)
 		{
@@ -546,7 +546,7 @@ public class ExampleStreaming : MonoBehaviour
 		}
 	}
 
-	private void OnRecognizeSpeaker(SpeakerRecognitionEvent result)
+	private void OnRecognizeSpeaker(SpeakerRecognitionEvent result,Dictionary<string, object> customData)
 	{
 		if (result != null)
 		{

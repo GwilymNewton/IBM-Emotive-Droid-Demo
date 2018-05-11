@@ -43,7 +43,6 @@ namespace IBM.Watson.DeveloperCloud.UnitTests
         private string _createdCorpusName = "the-jabberwocky-corpus";
         private string _customCorpusFilePath;
         private string _customWordsFilePath;
-        private string _wavFilePath;
         private string _acousticResourceUrl = "https://ia802302.us.archive.org/10/items/Greatest_Speeches_of_the_20th_Century/TheFirstAmericaninEarthOrbit.mp3";
         private bool _isAudioLoaded = false;
         private string _createdAcousticModelId;
@@ -723,7 +722,7 @@ namespace IBM.Watson.DeveloperCloud.UnitTests
 
         private void OnFail(RESTConnector.Error error, Dictionary<string, object> customData)
         {
-            Log.Error("ExampleAlchemyLanguage.OnFail()", "Error received: {0}", error.ToString());
+            Log.Error("ExampleSpeechToText.OnFail()", "Error received: {0}", error.ToString());
         }
     }
 }
