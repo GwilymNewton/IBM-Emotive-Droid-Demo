@@ -17,4 +17,25 @@ Using this it then runs the text though [Watson Tone Analyser](https://www.ibm.c
 
 ### Getting Started
 
-Coming Soon....
+1. Sign up for an account with [IBM Cloud](https://console.bluemix.net/registration/)
+
+2. Create your Speech to Text Service
+    2.1. Sign in using the account you created, and go to [Catalog](https://console.bluemix.net/catalog/) and go to find [Speech to Text](https://console.bluemix.net/catalog/services/speech-to-text) and create a new instance.
+    2.2. Then go to "Service credentials"
+    2.3. Click on "View Credentials", and copy the credentials, which should look like
+        
+        {
+          "url": "https://stream.watsonplatform.net/speech-to-text/api",
+          "username": "a0a310b5-dont-steal-mine",
+          "password": "super-secret"
+        }
+        
+    2.4. Thesse can then be added to [EmotivDroid.cs](https://github.com/GwilymNewton/IBM-Emotive-Droid-Demo/blob/master/Assets/EmotivDroid/Scripts/EmotivDroid.cs) around line 40:
+    
+        
+        private string _username_STT = "";
+        private string _password_STT = "";
+        private string _url_STT = "https://stream.watsonplatform.net/speech-to-text/api";
+        
+
+3) Create your Own Tone Analyser Service
