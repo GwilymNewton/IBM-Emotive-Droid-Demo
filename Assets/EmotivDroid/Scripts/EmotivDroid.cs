@@ -38,8 +38,8 @@ using System.Linq;
 public class EmotivDroid : MonoBehaviour
 {
 
-	private string _username_STT = "d5935aa0-b95a-42f5-84e8-5689664cf9a7";
-	private string _password_STT = "Y8OJ7Z55FqQL";
+	private string _username_STT = "";
+	private string _password_STT = "";
 	private string _url_STT = "https://stream.watsonplatform.net/speech-to-text/api";
 
 	public Text CactusField;
@@ -47,8 +47,8 @@ public class EmotivDroid : MonoBehaviour
 	private SpeechToText _speechToText;
 
 	// TONE ZONE
-	private string _username_TONE = "7c9eaccb-a7ed-4ddd-a951-2dfefceab4b5";
-	private string _password_TONE = "kRdyFMt3e016";
+	private string _username_TONE = "";
+	private string _password_TONE = "";
 	private string _url_TONE = "https://gateway.watsonplatform.net/tone-analyzer/api";
 
 
